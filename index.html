@@ -1,0 +1,1633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Bay Town Baddies</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Sniglet&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#FA008B',
+                        secondary: '#000000',
+                    },
+                    fontFamily: {
+                        sans: ['"Luckiest Guy"', 'cursive'],
+                        heading: ['"Luckiest Guy"', 'cursive'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        html {
+            font-size: 16px;
+        }
+        
+        @media (min-width: 1024px) {
+            html {
+                font-size: calc(16px + 0.2vw);
+            }
+        }
+        
+        @media (min-width: 1600px) {
+            html {
+                font-size: calc(16px + 0.5vw);
+            }
+        }
+        
+        .swiper-slide {
+            transition: all 0.3s ease;
+        }
+        .swiper-slide:hover {
+            transform: scale(1.02);
+        }
+        .program-card {
+            box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease;
+        }
+        .program-card:hover {
+            box-shadow: 0 15px 40px -5px rgba(0, 0, 0, 0.15);
+        }
+        .see-more-btn {
+            transition: all 0.3s ease;
+        }
+        .see-more-btn:hover {
+            transform: translateX(5px);
+        }
+        .swiper-button-next::after,
+        .swiper-button-prev::after {
+            font-size: 1rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .swiper-button-next:hover, 
+        .swiper-button-prev:hover {
+            transform: scale(1.05);
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Teko:wght@400;500;600;700&family=Quicksand:wght@400;500;600;700&display=swap');
+
+        @keyframes gradientAnimation1 {
+            0% { background-position: 0% 50% }
+            50% { background-position: 100% 50% }
+            100% { background-position: 0% 50% }
+        }
+
+        @keyframes gradientAnimation2 {
+            0% { background-position: 0% 50% }
+            50% { background-position: 100% 50% }
+            100% { background-position: 0% 50% }
+        }
+
+        @keyframes gradientAnimation3 {
+            0% { background-position: 0% 50% }
+            50% { background-position: 100% 50% }
+            100% { background-position: 0% 50% }
+        }
+
+        @keyframes gradientAnimation4 {
+            0% { background-position: 0% 50% }
+            50% { background-position: 100% 50% }
+            100% { background-position: 0% 50% }
+        }
+
+        @keyframes gradientAnimation5 {
+            0% { background-position: 0% 50% }
+            50% { background-position: 100% 50% }
+            100% { background-position: 0% 50% }
+        }
+
+        body {
+            font-family: 'Sniglet', cursive;
+            overflow-x: hidden;
+        }
+
+        .hero-slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        .hero-slide.active {
+            opacity: 1;
+        }
+
+        .slide-content {
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.8s ease 0.3s;
+        }
+
+        .active .slide-content {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .nav-link {
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: #FA008B;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .dropdown-menu {
+            opacity: 0;
+            transition: opacity 0.7s ease;
+            pointer-events: none;
+        }
+        
+        .dropdown-menu.fade-in {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        
+        .dropdown-menu.fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .dropdown-menu.hidden {
+            display: none;
+        }
+
+        .dropdown:hover .dropdown-menu,
+        .dropdown-menu:hover {
+            display: block;
+        }
+
+        .dropdown:not(:hover) .dropdown-menu {
+            transition-delay: 0.75s;
+        }
+
+        .btn-primary {
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .logo {
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .section-nav-btn {
+            transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+            cursor: pointer;
+            position: relative;
+            transform: scale(1);
+        }
+
+        .section-nav-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .section-nav-btn.scale-110 {
+            transform: scale(1.1);
+            box-shadow: 0 0 15px rgba(255,255,255,0.5);
+        }
+
+        .section-nav-btn::after {
+            content: attr(title);
+            position: absolute;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0,0,0,0.7);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            white-space: nowrap;
+        }
+
+        @keyframes playerSlideIn {
+            0% {
+                transform: translateX(100px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes playerSlideOut {
+            0% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateX(100px);
+                opacity: 0;
+            }
+        }
+
+        #playerGif {
+            right: -100px;
+            opacity: 0;
+            transform: translateX(100px);
+            transition: opacity 1.5s ease, transform 1.5s ease;
+        }
+
+        #playerGif.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        #playerGif.inactive {
+            opacity: 0;
+            transform: translateX(100px);
+        }
+
+        .animate-slide-in-right {
+            animation: slide-in-right 1.5s ease forwards;
+        }
+
+        .section-nav-btn:hover::after {
+            opacity: 1;
+        }
+
+        footer {
+            position: relative;
+            z-index: 10;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #FA008B, #FF5858, #8E54E9);
+        }
+
+        #footerScrollBtn {
+            transition: all 0.3s ease;
+        }
+
+        #footerScrollBtn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        /* Buddies Fullscreen Popup */
+        #buddiesSlideshow_modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 15, 15, 0.95);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            flex-direction: column;
+        }
+
+        #buddiesSlideshow_modal img {
+            max-width: 90%;
+            max-height: 80vh;
+            object-fit: contain;
+            border-radius: 12px;
+        }
+
+        .buddiesSlideshow_controls {
+            margin-top: 20px;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .buddiesSlideshow_controls button {
+            background: #fa008b;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .buddiesSlideshow_controls button:hover {
+            background: #ddd;
+        }
+
+        #buddiesSlideshow_modal .buddiesSlideshow_closeBtn {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 2rem;
+            color: white;
+            cursor: pointer;
+        }
+
+        .hover-underline-animation {
+            display: inline-block;
+            position: relative;
+        }
+
+        .hover-underline-animation:after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            transform: scaleX(0);
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: white;
+            transform-origin: bottom right;
+            transition: transform 0.25s ease-out;
+        }
+
+        .hover-underline-animation:hover:after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+
+        .social-icon {
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            transform: translateY(-5px);
+        }
+        
+        /* Fix for hidden content */
+        .full-width-container {
+            width: 100%;
+            max-width: 100%;
+            padding: 2rem;
+        }
+        
+        .program-card {
+            min-height: 400px;
+        }
+        
+        .swiper-container {
+            overflow: visible;
+        }
+        
+        #EN_section3 {
+            padding: 4rem 0;
+        }
+        
+        #EN_section4 {
+            padding: 4rem 0;
+        }
+        
+        #EN_section6 {
+            padding: 4rem 0;
+        }
+        
+        .container {
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+        }
+
+        /* Fixed gradient animations */
+        .gradient-animation-1 {
+            background: linear-gradient(135deg, #d30090 0%, #FA008B 100%);
+            background-size: 200% 200%;
+            animation: gradientAnimation1 12s ease infinite;
+        }
+
+        .gradient-animation-2 {
+            background: linear-gradient(135deg, #FA008B 0%, #FF5858 100%);
+            background-size: 200% 200%;
+            animation: gradientAnimation2 12s ease infinite;
+        }
+
+        .gradient-animation-3 {
+            background: linear-gradient(135deg, white 0%, #fcc8e2 100%);
+            background-size: 200% 200%;
+            animation: gradientAnimation3 15s ease infinite;
+        }
+
+        /* Footer fixes */
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .footer-col {
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .footer-col-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .footer-links {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .footer-link-item {
+            margin-bottom: 0.75rem;
+        }
+
+
+
+
+
+
+
+
+
+
+ /* Custom CSS for comic effects */
+        body {
+            background-color: white;
+            position: relative;
+            min-height: 100vh;
+        }
+        
+        .comic-dot {
+            background-color: black;
+            border-radius: 50%;
+            position: absolute;
+            animation: randomAppear 4s ease-in-out infinite;
+            animation-delay: calc(var(--i) * 0.1s);
+            transform-origin: center;
+        }
+        
+        .comic-line {
+            position: absolute;
+            transform-origin: center;
+            animation: randomAppear 4s ease-in-out infinite;
+            animation-delay: calc(var(--i) * 0.2s);
+            opacity: 0;
+            background: repeating-linear-gradient(
+                to right,
+                black,
+                black 3px,
+                transparent 3px,
+                transparent 6px
+            );
+            height: 2px;
+        }
+        
+        .comic-star {
+            position: absolute;
+            color: #87CEEB; /* Sky Blue */
+            font-size: 1.5rem;
+            animation: randomAppear 4s ease-in-out infinite;
+            transform-origin: center;
+            animation-delay: calc(var(--i) * 0.2s);
+        }
+        
+        .comic-burst {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background-color: #FFB6C1; /* Light Pink */
+            clip-path: polygon(
+                50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%
+            );
+            animation: randomAppear 4s ease-in-out infinite;
+            transform-origin: center;
+        }
+        
+        @keyframes randomAppear {
+            0%, 100% { 
+                transform: rotate(calc(var(--angle) * 1deg)) scale(0); 
+                opacity: 0; 
+            }
+            50% { 
+                transform: rotate(calc(var(--angle) * 1deg)) scale(1); 
+                opacity: 1; 
+            }
+        }
+
+        html, body {
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        .popup-element {
+            position: absolute;
+            border-radius: var(--border-radius, 50%);
+            transform-origin: center;
+            animation: randomAppear 4s ease-in-out infinite;
+            animation-delay: calc(var(--i) * 0.5s);
+        }
+        
+        .content-container {
+            background-color: white;
+            padding: 25px;
+            margin: 20px auto;
+            max-width: 800px;
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-900">
+    <!-- Section 1 - Hero Slider -->
+    <section id="EN_section1" class="relative h-screen w-full overflow-hidden">
+        <!-- Floating Logo -->
+        <div class="fixed top-6 left-6 z-50">
+            <div class="logo bg-white p-2 rounded-lg shadow-lg backdrop-blur-sm bg-opacity-90">
+                <div class="flex items-center">
+                    <img src="logo-01.png" alt="Description of image" class="w-32 md:w-40">
+                    <span class="font-heading text-2xl font-bold text-primary"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Floating Navigation -->
+        <nav class="fixed top-6 right-6 z-50 backdrop-blur-sm bg-white bg-opacity-80 px-4 py-2 rounded-lg shadow-lg">
+            <div class="hidden md:block">
+                <ul class="flex space-x-8">
+                    <li><a href="index.html" class="nav-link text-black font-semibold text-base md:text-lg hover:text-primary font-sans">Home</a></li>
+                   
+                   
+                    <li class="dropdown relative">
+                        <a href="all.html" class="nav-link text-black font-semibold text-lg hover:text-primary font-sans flex items-center">
+                            Teams <i class="fas fa-chevron-down ml-1 text-sm"></i>
+                        </a>
+                        <ul class="dropdown-menu absolute hidden bg-white rounded-md shadow-lg mt-2 py-1 w-48">
+                            <li><a href="NorthBay31.html" class="block px-4 py-2  text-sm text-gray-800 hover:bg-primary hover:text-white">North bay  2030-2031</a></li>
+                            <li><a href="EastBay31.html" class="block px-4 py-2  text-sm text-gray-800 hover:bg-primary hover:text-white">East bay  2030-2031</a></li>
+                            <li><a href="NorthBay33.html" class="block px-4 py-2  text-sm text-gray-800 hover:bg-primary hover:text-white">North bay  2032-2033</a></li>
+                            <li><a href="EastBay33.html" class="block px-4 py-2  text-sm text-gray-800 hover:bg-primary hover:text-white">East bay 2032-2033</a></li>
+                            <li><a href="NorthBay35.html" class="block px-4 py-2  text-sm text-gray-800 hover:bg-primary hover:text-white">North bay  2034-2035</a></li>
+                            <li><a href="EastBay35.html" class="block px-4 py-2  text-sm text-gray-800 hover:bg-primary hover:text-white">East bay  2034-2035</a></li>
+                        </ul>
+                    </li>
+                  
+                    <li><a href="about.html" class="nav-link text-black font-semibold text-lg hover:text-primary font-sans">About</a></li>
+                </ul>
+            </div>
+            <div class="md:hidden">
+                <button class="text-white text-2xl">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </nav>
+
+
+        <!-- Slides -->
+        <div class="relative h-full w-full">
+            <!-- Slide 1 -->
+            <div class="hero-slide active" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('SS3.jpg');">
+                <div class="container mx-auto h-full flex items-end pb-10 px-6">
+                    <div class="slide-content max-w-md text-white text-left">
+                        <h1 class="font-heading text-2xl md:text-3xl lg:text-4xl mb-2 leading-tight">PLAY BOLD. GROW STRONG</h1>
+                        <p class="text-sm md:text-base mb-4">Our programs build confident players with sharp game IQ, strong teamwork, and the mindset to lead—on and off the field.</p>
+           
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 2 -->
+              <div class="hero-slide" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('SS1.jpg');">
+                <div class="container mx-auto h-full flex items-end pb-10 px-6">
+                    <div class="slide-content max-w-md text-white text-left">
+                        <h1 class="font-heading text-2xl md:text-3xl lg:text-4xl mb-2 leading-tight">EMPOWERING THE NEXT GENERATION</h1>
+                        <p class="text-sm md:text-base mb-4">Through elite girls lacrosse programs across the North & East Bay. We build confidence, skill, and leadership in every player—from first-time beginners to rising all-stars.</p>
+                     
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 3 -->
+            <div class="hero-slide" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('SS2.jpg');">
+                <div class="container mx-auto h-full flex items-end pb-10 px-6">
+                    <div class="slide-content max-w-md text-white text-left">
+                        <h1 class="font-heading text-2xl md:text-3xl lg:text-4xl mb-2 leading-tight">LEARN FROM THE BEST</h1>
+                        <p class="text-sm md:text-base mb-4">Our coaching staff includes former collegiate players and certified trainers dedicated to developing the next generation of women athletes.</p>
+                      
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide Indicators -->
+        <div class="absolute bottom-6 left-1/2 transform -translate-x-1/2 z-50 flex space-x-2">
+            <button class="w-3 h-3 rounded-full bg-white opacity-100 slide-indicator active" data-slide="0"></button>
+            <button class="w-3 h-3 rounded-full bg-white opacity-50 slide-indicator" data-slide="1"></button>
+            <button class="w-3 h-3 rounded-full bg-white opacity-50 slide-indicator" data-slide="2"></button>
+        </div>
+    </section>
+
+    <!-- Section 2 -->
+    <section id="EN_section2" class="relative w-full py-16 overflow-hidden gradient-animation-2">
+        <div class="full-width-container">
+           <div class="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
+                <div class="flex flex-col items-center justify-center text-center text-white mb-8">
+                    <img src="OTP-02.png" alt="Our Team Programs" class="w-full max-w-[600px] h-auto mb-4" />
+                </div>
+                                
+                <!-- Slider Container -->
+                <div class="swiper programSwiper relative w-full">
+                    <div class="swiper-wrapper">
+                        <!-- Slide 1 -->
+                        <div class="swiper-slide px-4 py-6">
+                            <div class="program-card bg-white rounded-xl overflow-hidden h-full flex flex-col">
+                                <div class="aspect-w-16 aspect-h-9 overflow-hidden">
+                                    <picture>
+                                        <source media="(min-width: 1024px)" srcset="N.jpg">
+                                        <source media="(min-width: 768px)" srcset="N.jpg">
+                                        <img src="N.jpg"
+                                            alt="NORTH BAY BADDIES"
+                                            class="w-full h-full object-cover">
+                                    </picture>
+                                </div>
+                                <div class="p-6 flex-grow flex flex-col">
+                                    <h3 class="text-l font-bold text-gray-900">NORTH BAY BADDIES</h3>
+                                    <p class="text-gray-500 mt-1">2030-2031</p>
+                                    <a href="NorthBay31.html" class="see-more-btn mt-6 inline-flex items-center px-4 py-2 bg-primary text-white rounded-lg font-medium group transition-all hover:bg-opacity-90 shadow-sm">
+                                        See More
+                                        <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                                                
+                        <!-- Slide 4 -->
+                        <div class="swiper-slide px-4 py-6">
+                            <div class="program-card bg-white rounded-xl overflow-hidden h-full flex flex-col">
+                                <div class="aspect-w-16 aspect-h-9 overflow-hidden">
+                                    <picture>
+                                        <source media="(min-width: 1024px)" srcset="E.jpg">
+                                        <source media="(min-width: 768px)" srcset="E.jpg">
+                                        <img src="E.jpg"
+                                            alt="EAST BAY BADDIES"
+                                            class="w-full h-full object-cover">
+                                    </picture>
+                                </div>
+                                <div class="p-6 flex-grow flex flex-col">
+                                    <h3 class="text-l font-bold text-gray-900">EAST BAY BADDIES</h3>
+                                    <p class="text-gray-500 mt-1">2030-2031</p>
+                                    <a href="EastBay31.html" class="see-more-btn mt-6 inline-flex items-center px-4 py-2 bg-primary text-white rounded-lg font-medium group transition-all hover:bg-opacity-90 shadow-sm">
+                                        See More
+                                        <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Slide 2 -->
+                        <div class="swiper-slide px-4 py-6">
+                            <div class="program-card bg-white rounded-xl overflow-hidden h-full flex flex-col">
+                                <div class="aspect-w-16 aspect-h-9 overflow-hidden">
+                                    <picture>
+                                        <source media="(min-width: 1024px)" srcset="N2.jpg">
+                                        <source media="(min-width: 768px)" srcset="N2.jpg">
+                                        <img src="N2.jpg"
+                                            alt="NORTH BAY BADDIES"
+                                            class="w-full h-full object-cover">
+                                    </picture>
+                                </div>
+                                <div class="p-6 flex-grow flex flex-col">
+                                    <h3 class="text-l font-bold text-gray-900">NORTH BAY BADDIES</h3>
+                                    <p class="text-gray-500 mt-1">2032-2033</p>
+                                    <a href="NorthBay33.html" class="see-more-btn mt-6 inline-flex items-center px-4 py-2 bg-primary text-white rounded-lg font-medium group transition-all hover:bg-opacity-90 shadow-sm">
+                                        See More
+                                        <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Slide 5 -->
+                        <div class="swiper-slide px-4 py-6">
+                            <div class="program-card bg-white rounded-xl overflow-hidden h-full flex flex-col">
+                                <div class="aspect-w-16 aspect-h-9 overflow-hidden">
+                                    <picture>
+                                        <source media="(min-width: 1024px)" srcset="E2.jpg">
+                                        <source media="(min-width: 768px)" srcset="E2.jpg">
+                                        <img src="E2.jpg"
+                                            alt="EAST BAY BADDIES"
+                                            class="w-full h-full object-cover">
+                                    </picture>
+                                </div>
+                                <div class="p-6 flex-grow flex flex-col">
+                                    <h3 class="text-l font-bold text-gray-900">EAST BAY BADDIES</h3>
+                                    <p class="text-gray-500 mt-1">2032-2033</p>
+                                    <a href="EastBay33.html" class="see-more-btn mt-6 inline-flex items-center px-4 py-2 bg-primary text-white rounded-lg font-medium group transition-all hover:bg-opacity-90 shadow-sm">
+                                        See More
+                                        <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Slide 3 -->
+                        <div class="swiper-slide px-4 py-6">
+                            <div class="program-card bg-white rounded-xl overflow-hidden h-full flex flex-col">
+                                <div class="aspect-w-16 aspect-h-9 overflow-hidden">
+                                    <picture>
+                                        <source media="(min-width: 1024px)" srcset="N1.jpg">
+                                        <source media="(min-width: 768px)" srcset="N1.jpg">
+                                        <img src="N1.jpg"
+                                            alt="NORTH BAY BADDIES"
+                                            class="w-full h-full object-cover">
+                                    </picture>
+                                </div>
+                                <div class="p-6 flex-grow flex flex-col">
+                                    <h3 class="text-l font-bold text-gray-900">NORTH BAY BADDIES</h3>
+                                    <p class="text-gray-500 mt-1">2034-2035</p>
+                                    <a href="NorthBay35.html" class="see-more-btn mt-6 inline-flex items-center px-4 py-2 bg-primary text-white rounded-lg font-medium group transition-all hover:bg-opacity-90 shadow-sm">
+                                        See More
+                                        <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Slide 6 -->
+                        <div class="swiper-slide px-4 py-6">
+                            <div class="program-card bg-white rounded-xl overflow-hidden h-full flex flex-col">
+                                <div class="aspect-w-16 aspect-h-9 overflow-hidden">
+                                    <picture>
+                                        <source media="(min-width: 1024px)" srcset="E1.jpg">
+                                        <source media="(min-width: 768px)" srcset="E1.jpg">
+                                        <img src="E1.jpg"
+                                            alt="EAST BAY BADDIES"
+                                            class="w-full h-full object-cover">
+                                    </picture>
+                                </div>
+                                <div class="p-6 flex-grow flex flex-col">
+                                    <h3 class="text-l font-bold text-gray-900">EAST BAY BADDIES</h3>
+                                    <p class="text-gray-500 mt-1">2034-2035</p>
+                                    <a href="EastBay35.html" class="see-more-btn mt-6 inline-flex items-center px-4 py-2 bg-primary text-white rounded-lg font-medium group transition-all hover:bg-opacity-90 shadow-sm">
+                                        See More
+                                        <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Navigation Buttons -->
+                    <div class="swiper-button-next hidden sm:flex items-center justify-center w-10 h-10 rounded-full bg-white/80 backdrop-blur-sm text-primary hover:bg-white transition-all shadow-sm"></div>
+                    <div class="swiper-button-prev hidden sm:flex items-center justify-center w-10 h-10 rounded-full bg-white/80 backdrop-blur-sm text-primary hover:bg-white transition-all shadow-sm"></div> <br>
+                    <!-- Pagination Dots -->
+                    <div class="swiper-pagination mt-6"></div>
+                    <style>
+                        .swiper-pagination-bullet {
+                            background-color: #ffffff !important;
+                        }
+                        .swiper-pagination-bullet-active {
+                            background-color: #ffffff !important;
+                        }
+                    </style>
+                </div>
+                <div class="mt-8 text-center">
+                  <a href="all.html" style="font-family: 'Sniglet', cursive; font-size: 0.75rem;" class="btn-primary inline-block bg-white text-pink-600 font-bold py-2 px-8 rounded-full uppercase tracking-wider">
+All Team Programs
+</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="EN_section4" class="relative w-full py-16 overflow-hidden gradient-animation-2">
+                
+        <!--  🔼 Main Content -->
+        <div class="container mx-auto h-full flex items-center justify-center px-6" style="position: relative; z-index: 2;">	
+
+ <div id="comic-elements" style="position: relative; min-height: 100vh;"></div>
+            <div class="max-w-2xl text-center text-white">
+               <center> <img src="SC1.png" alt="HEY BUDDIES, YOU IN?" style="width:600px; height:auto; margin-bottom:10px;" /></center>
+                <br>
+                <div class="flex flex-col md:flex-row gap-8 justify-center items-start">
+                    <!-- Summer Camp Sessions Card -->
+                    <div class="relative bg-[#ffd1e5] text-[#880045] px-6 py-5 rounded-xl shadow-lg rotate-[-2deg] w-full md:w-1/2 overflow-hidden">
+                        <!-- Title -->
+                        <div class="text-xl font-bold mb-4 text-[#d70067] border-b border-[#ff3ebf] pb-2">📌 Summer Camp Sessions</div>
+                                                
+                        <!-- Marin Academy -->
+                        <div class="mb-5">
+                            <p class="font-semibold text-base"> <i class="fas fa-map-marker-alt text-pink-500"></i> &nbsp; North Bay <br> Marin Academy High School</p> <br>
+                            <p class="text-xs mt-1">🕒 <strong>July 29</strong> | 9:00 AM – 1:00 PM</p>
+                            <button class="mt-2 bg-[#e5007d] text-white text-sm px-4 py-2 rounded hover:bg-[#c40067] transition">Register Now</button>
+                        </div>
+                                                
+                        <!-- August 7 -->
+                        <div class="mb-5">
+                            <p class="text-xs">🕒 <strong>August 7</strong> | 9:00 AM – 1:00 PM</p>
+                            <button class="mt-2 bg-[#e5007d] text-white text-sm px-4 py-2 rounded hover:bg-[#c40067] transition">Register Now</button>
+                        </div>
+                            
+
+  <div class="text-xl font-bold mb-4 text-[#d70067] border-b border-[#ff3ebf] pb-2"></div>
+
+
+
+
+
+
+                    
+                        <!-- East Bay -->
+                        <div>
+                            <p class="font-semibold"><i class="fas fa-map-marker-alt text-pink-500"></i> &nbsp; East Bay <br> Diablo Vista Middle School</p><br>
+                            <p class="text-xs mt-1">🕒 <strong>August 5</strong> | 9:00 AM – 1:00 PM</p>
+                            <button class="mt-2 bg-[#e5007d] text-white text-sm px-4 py-2 rounded hover:bg-[#c40067] transition">Register Now</button>
+                        </div>
+                    </div>
+                                        
+                    <!-- Fall Tryouts Card -->
+                    <div class="relative bg-[#def2fd] text-[#004466] px-6 py-5 rounded-xl shadow-lg rotate-[2deg] w-full md:w-1/2 overflow-hidden">
+                        <!-- Title -->
+                        <div class="text-xl font-bold mb-4 text-[#0078c8] border-b border-[#a0dfff] pb-2">📌 Fall Tryouts</div>
+                                                
+                        <!-- Redwood High -->
+                        <div class="mb-5">
+                            <p class="font-semibold"><i class="fas fa-map-marker-alt text-pink-500"></i>&nbsp;  North Bay <br> Redwood High School</p><br>
+                            <p class="text-xs mt-1">🕒 <strong>Sunday, August 17</strong> | 9:00 AM – 11:00 AM</p>
+                            <button class="mt-2 bg-[#0078c8] text-white text-sm px-4 py-2 rounded hover:bg-[#005b98] transition">Register Now</button>
+                        </div>
+                                 <div class="text-xl font-bold mb-4 text-[#0078c8] border-b border-[#a0dfff] pb-2"></div>
+                
+                        <!-- Diablo Vista -->
+                        <div>
+                            <p class="font-semibold"><i class="fas fa-map-marker-alt text-pink-500"></i>  &nbsp;East Bay <br> Diablo Vista Middle School</p><br>
+                            <p class="text-xs mt-1">🕒 <strong>Sunday, August 24</strong> | 9:00 AM – 11:00 AM</p>
+                            <button class="mt-2 bg-[#0078c8] text-white text-sm px-4 py-2 rounded hover:bg-[#005b98] transition">Register Now</button>
+                        </div>
+                    </div>
+                </div>
+                                                        
+                </div>
+        </div> <br><br>
+
+
+ <!--  🔽 Buddies Circular Slideshow (Clickable) -->
+        <div style="position: relative; bottom: 20px; left: 40px; display: flex; align-items: center; z-index: 2; gap: 10px;">
+            <!-- Circular Slideshow -->
+            <div onclick="buddiesSlideshow_open()" style="
+                width: 160px;
+                height: 160px;
+                border-radius: 50%;
+                border: 6px solid white;
+                overflow: hidden;
+                background: #ccc;
+                cursor: pointer;
+                flex-shrink: 0;
+            ">
+                <div style="
+                    display: flex;
+                    width: 480px;
+                    height: 160px;
+                    animation: buddiesSlideCircle 9s infinite ease-in-out;
+                ">
+                    <img src="images/flyers/flyer1.jpg" style="width: 160px; height: 160px; object-fit: cover;" />
+                    <img src="images/flyers/flyer2.jpg" style="width: 160px; height: 160px; object-fit: cover;" />
+                    <img src="images/flyers/flyer3.jpg" style="width: 160px; height: 160px; object-fit: cover;" />
+                </div>
+            </div>
+
+            <!-- Additional Image (next to circle, center aligned vertically, no mask) -->
+            <img src="SC2.png" style="width: 170px; object-fit: contain;" alt=" Extra Image" />
+        </div>
+
+        <style>
+            @keyframes buddiesSlideCircle {
+                0%, 33% { transform: translateX(0); }
+                44%, 66% { transform: translateX(-160px); }
+                77%, 100% { transform: translateX(-320px); }
+            }
+        </style>
+
+
+    </section>
+    
+    <!-- Section 3 -->
+<section id="EN_section3" class="relative w-full py-16 overflow-hidden gradient-animation-1">
+    <!-- Player Image: Right Bottom, Full Height, Mobile-Friendly -->
+   <div class="absolute inset-0 z-0 flex justify-end items-end pointer-events-none">
+  <img src="Loading4.png" alt="HEY BUDDIES, YOU IN?"
+       class="h-full max-h-full w-auto object-contain" />
+</div>
+
+    <!-- Main Content -->
+    <div class="container mx-auto h-full flex items-center px-6 relative z-10">
+        <div class="w-full max-w-2xl text-white bg-black bg-opacity-50 p-8 rounded-lg mx-auto">
+            <div class="flex flex-col justify-center items-center text-center text-white text-[20px] font-['Helvetica Neue',sans-serif]">
+                <img src="Email-02.png" alt="HEY BUDDIES, YOU IN?" class="w-full max-w-[600px] mb-4" />
+                
+                <p class="font-['Sniglet',cursive] text-lg md:text-sm mb-8">
+                    We're gearing up for new tryouts, <br>
+                    elite coaching sessions, and top-class events<br>
+                    and we want you with us! Be the first one who knows all the latest updates.
+                </p>
+
+                <!-- Email Input Form -->
+                <div class="w-full max-w-md space-y-4">
+                    <div class="relative">
+                        <input
+                            type="email"
+                            placeholder="Enter your email"
+                            required
+                            class="w-full px-4 py-3 sm:py-4 text-pink-600 rounded-lg border-2 border-pink-500 focus:outline-none input-glow font-medium placeholder-pink-400"
+                        />
+                        <svg class="absolute right-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-pink-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        </svg>
+                    </div>
+                    <div class="mt-8 text-center">
+                        <a href="#" class="btn-primary inline-block bg-white text-pink-600 font-bold py-2 px-8 rounded-full uppercase tracking-wider text-xs font-['Sniglet',cursive]">
+                            Get Updates
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+       
+    <!-- Mobile Menu (hidden by default) -->
+    <div class="fixed inset-0 bg-black bg-opacity-90 z-50 hidden" id="mobileMenu">
+        <div class="flex flex-col items-center justify-center h-full">
+            <button class="absolute top-6 right-6 text-white text-3xl" id="closeMenu">
+                <i class="fas fa-times"></i>
+            </button>
+            <ul class="space-y-8 text-center">
+                <li><a href="index.html" class="text-white text-2xl font-bold hover:text-primary font-sans">Home</a></li>
+              
+              
+                <li class="relative">
+                    <a href="all.html" class="text-white text-2xl font-bold hover:text-primary flex items-center justify-center font-sans">
+                        Teams <i class="fas fa-chevron-down ml-2 text-sm"></i>
+                    </a>
+                    <ul class="mt-4 space-y-4 hidden" id="mobileTeams">
+                        <li><a href="NorthBay31.html" class="text-white text-xl hover:text-primary block">North bay  2030-2031</a></li>
+                        <li><a href="EastBay31.html" class="text-white text-xl hover:text-primary block">East bay 2030-2031</a></li>
+                        <li><a href="NorthBay33.html" class="text-white text-xl hover:text-primary block">North bay 2032-2033</a></li>
+                        <li><a href="EastBay33.html" class="text-white text-xl hover:text-primary block">East bay  2032-2033</a></li>
+                        <li><a href="NorthBay35.html" class="text-white text-xl hover:text-primary block">North bay  2034-2035</a></li>
+                        <li><a href="EastBay35.html" class="text-white text-xl hover:text-primary block">East bay 2034-2035</a></li>
+                    </ul>
+                </li>
+              
+                <li><a href="about.html" class="text-white text-2xl font-bold hover:text-primary font-sans">About</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Section 6 -->
+    <section id="EN_section6" class="relative w-full py-16 overflow-hidden gradient-animation-3">
+        <div class="container mx-auto h-full flex items-center justify-center px-6">
+            <div class="max-w-2xl text-center">
+ <center> <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2zm0 1.5A4.25 4.25 0 0 0 3.5 7.75v8.5A4.25 4.25 0 0 0 7.75 20.5h8.5A4.25 4.25 0 0 0 20.5 16.25v-8.5A4.25 4.25 0 0 0 16.25 3.5h-8.5zM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 1.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7zm5.25-.75a.75.75 0 1 1 0 1.5.75.75 0 0 1 0-1.5z"/>
+                        </svg> </center> 
+                <img src="SC3.png" alt="HEY BUDDIES, YOU IN?" style="width:600px; height:auto; margin-bottom:10px;" />
+
+               
+                <div class="flex justify-center flex-wrap gap-4">
+                        <!-- Instagram Button -->
+                    <a href="#"
+                        class="inline-flex items-center bg-[#FA008B] text-white font-bold py-3 px-8 rounded-full text-lg   tracking-wider
+                                transition-transform duration-200 ease-in-out hover:scale-105">
+                                        
+                        @BayTownBaddies
+                    </a>
+                    <!-- Action Moments Button -->
+                                </div>
+            </div>
+        </div>
+                
+        <!-- Instagram Feed -->
+        <div class="container mx-auto mt-12 px-6">
+           <!-- LightWidget WIDGET --><script src="https://cdn.lightwidget.com/widgets/lightwidget.js"></script><iframe src="https://cdn.lightwidget.com/widgets/f68863be76145f40912a9130ecce0cfd.html" scrolling="no" allowtransparency="true" class="lightwidget-widget" style="width:100%;border:0;overflow:hidden;"></iframe>
+        </div>
+    </section>
+
+   <!-- Section 7 -->
+    <section id="EN_section7" class="relative w-full py-16 overflow-hidden gradient-animation-3">
+                
+        <!-- Footer Section -->
+        <footer class="relative text-gray-800 w-full">
+            <div class="container mx-auto px-6">
+                <!-- Main Footer Content -->
+                <div class="footer-grid">
+                    <!-- Logo and About Section (Pink) -->
+                    <div class="footer-col bg-pink-100">
+                        <div class="footer-col-content">
+                            <div class="p-4 rounded-full mb-4 flex justify-center">
+                                <img src="logo-01.png" alt="Description of image" width="150">
+                            </div>
+                            <h2 class="text-2xl font-bold mb-4 text-pink-800 text-center">Bay<span class="text-pink-500">Town</span><span class="text-pink-500">Baddies</span></h2>
+                            <p class="text-pink-700 text-center mb-6">
+                               Empowering Girls Lacrosse in the Bay Area.
+                            </p>
+                            <div class="flex justify-center space-x-4 mt-auto">
+                              
+                                <!-- Instagram icon - purple -->
+                                <a href="#" class="social-icon text-purple-600 hover:text-purple-800 text-xl">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Links Section (Sky Blue) -->
+                    <div class="footer-col bg-sky-100">
+                        <div class="footer-col-content">
+                        
+ <h3 class="text-l font-semibold mb-6 hover-underline-animation inline-block text-sky-800">Quick Links</h3>
+                            <div class="footer-links">
+                                <div>
+                                    <div class="footer-link-item"><a href="index.html" class="text-sky-700 hover:text-sky-500 transition">Home</a></div>
+                                    <div class="footer-link-item"><a href="all.html" class="text-sky-700 hover:text-sky-500 transition">Teams</a></div>
+                                    
+                                
+                                    <div class="footer-link-item"><a href="about.html" class="text-sky-700 hover:text-sky-500 transition">About Us</a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Info Section (Orange) -->
+                    <div class="footer-col bg-orange-100">
+                        <div class="footer-col-content">
+                            
+
+ <h3 class="text-l font-semibold mb-6 hover-underline-animation inline-block text-orange-800">Contact Us</h3>
+                            <div class="footer-links">
+                                <div>
+                                  <div class="footer-link-item">
+  <a href="#" class="text-sky-700 hover:text-sky-500 transition text-base normal-case">
+    <i class="fas fa-map-marker-alt text-orange-500"></i> San Francisco, CA
+  </a>
+</div>
+
+
+
+
+ <div class="footer-link-item">
+  <a href="#" class="text-sky-700 hover:text-sky-500 transition text-base normal-case">
+    <i class="fas fa-phone-alt text-orange-500"></i> +1 (415) 622-3449
+  </a>
+</div>
+
+
+ <div class="footer-link-item">
+  <a href="#" class="text-sky-700 hover:text-sky-500 transition text-base normal-case">
+    <i class="fas fa-envelope text-orange-500"></i> info@BaddiesLacrosse.com
+  </a>
+</div>
+                                   
+
+
+
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </section>
+
+
+    <!-- Enhanced Section Navigation -->
+    <div class="fixed right-6 bottom-6 z-50 flex flex-col space-y-3">
+        <button class="section-nav-btn w-12 h-12 rounded-full bg-primary bg-opacity-80 hover:bg-opacity-100 transition-all flex items-center justify-center border-2 border-white shadow-lg" data-section="EN_section1" title="Return to Top">
+            <i class="fas fa-home text-white text-xl"></i>
+        </button>
+        <button class="section-nav-btn w-12 h-12 rounded-full bg-orange-500 bg-opacity-80 hover:bg-opacity-100 transition-all flex items-center justify-center border-2 border-white shadow-lg" data-section="EN_section2" title="Teams">
+            <i class="fas fa-users text-white text-xl"></i>
+        </button>
+                
+        <button class="section-nav-btn w-12 h-12 rounded-full bg-pink-500 bg-opacity-80 hover:bg-opacity-100 transition-all flex items-center justify-center border-2 border-white shadow-lg" data-section="EN_section4" title="Schedule">
+            <i class="fas fa-calendar-alt text-white text-xl"></i>
+        </button>
+  <button class="section-nav-btn w-12 h-12 rounded-full bg-purple-600 bg-opacity-80 hover:bg-opacity-100 transition-all flex items-center justify-center border-2 border-white shadow-lg" data-section="EN_section3" title="Subscribe">
+            <i class="fas fa-user-plus text-white text-xl"></i>
+        </button>
+        <button class="section-nav-btn w-12 h-12 rounded-full bg-blue-500 bg-opacity-80 hover:bg-opacity-100 transition-all flex items-center justify-center border-2 border-white shadow-lg" data-section="EN_section6" title="Community">
+            <i class="fas fa-hands-helping text-white text-xl"></i>
+        </button>
+    </div>
+
+    <!--  🔲 Buddies Fullscreen Slideshow Modal -->
+    <div id="buddiesSlideshow_modal">
+        <span class="buddiesSlideshow_closeBtn" onclick="buddiesSlideshow_close()">×</span>
+        <img id="buddiesSlideshow_image" src="" alt="Slideshow Image" />
+        <div class="buddiesSlideshow_controls">
+            <button onclick="buddiesSlideshow_prev()">⟨ Prev</button>
+            <button onclick="buddiesSlideshow_togglePlay()" id="buddiesSlideshow_playPause">Pause</button>
+            <button onclick="buddiesSlideshow_next()">Next ⟩</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const swiper = new Swiper('.programSwiper', {
+                slidesPerView: 1,
+                spaceBetween: 20,
+                loop: true,
+                autoplay: {
+                    delay: 3000,
+                    disableOnInteraction: false,
+                    pauseOnMouseEnter: true,
+                },
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                    bulletClass: 'swiper-pagination-bullet',
+                    bulletActiveClass: 'swiper-pagination-bullet-active',
+                },
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+                breakpoints: {
+                    640: {
+                        slidesPerView: 1,
+                        spaceBetween: 20
+                    },
+                    768: {
+                        slidesPerView: 2,
+                        spaceBetween: 20
+                    },
+                    1024: {
+                        slidesPerView: 3,
+                        spaceBetween: 20
+                    },
+                    1280: {
+                        slidesPerView: 4,
+                        spaceBetween: 20
+                    }
+                }
+            });
+
+            // Add custom styles for pagination bullets
+            const paginationBullets = document.querySelectorAll('.swiper-pagination-bullet');
+            paginationBullets.forEach(bullet => {
+                bullet.style.backgroundColor = '#FA008B';
+            });
+        });
+
+        // Enhanced smooth scrolling to sections
+        const navButtons = document.querySelectorAll('.section-nav-btn');
+                
+        navButtons.forEach((btn) => {
+            btn.addEventListener('click', function() {
+                const sectionId = this.getAttribute('data-section');
+                const targetSection = document.getElementById(sectionId);
+                if (targetSection) {
+                    // Calculate target position with offset from top
+                    const targetPosition = targetSection.offsetTop;
+                    const startPosition = window.pageYOffset;
+                    const distance = targetPosition - startPosition;
+                    const duration = 800; // milliseconds
+                    let startTime = null;
+                                        
+                    // Easing function for smooth acceleration/deceleration
+                    function easeInOutQuad(t, b, c, d) {
+                        t /= d/2;
+                        if (t < 1) return c/2*t*t + b;
+                        t--;
+                        return -c/2 * (t*(t-2) - 1) + b;
+                    }
+                                        
+                    function animation(currentTime) {
+                        if (!startTime) startTime = currentTime;
+                        const timeElapsed = currentTime - startTime;
+                        const run = easeInOutQuad(timeElapsed, startPosition, distance, duration);
+                        window.scrollTo(0, run);
+                        if (timeElapsed < duration) {
+                            requestAnimationFrame(animation);
+                        }
+                    }
+                                        
+                    requestAnimationFrame(animation);
+                }
+            });
+        });
+
+        // Slider functionality
+        const slides = document.querySelectorAll('.hero-slide');
+        const indicators = document.querySelectorAll('.slide-indicator');
+        let currentSlide = 0;
+
+        function showSlide(index) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            indicators.forEach(indicator => indicator.classList.remove('active'));
+
+            slides[index].classList.add('active');
+            indicators[index].classList.add('active');
+            indicators[index].classList.remove('opacity-50');
+            indicators[index].classList.add('opacity-100');
+
+            currentSlide = index;
+        }
+
+        function nextSlide() {
+            let nextIndex = (currentSlide + 1) % slides.length;
+            showSlide(nextIndex);
+        }
+
+        // Auto slide every 5 seconds
+        setInterval(nextSlide, 5000);
+
+        // Click on indicators
+        indicators.forEach(indicator => {
+            indicator.addEventListener('click', () => {
+                const slideIndex = parseInt(indicator.getAttribute('data-slide'));
+                showSlide(slideIndex);
+            });
+        });
+
+        // Mobile menu toggle
+        const mobileMenuButton = document.querySelector('.md\\:hidden button');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const closeMenuButton = document.getElementById('closeMenu');
+
+        if (mobileMenuButton) {
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.remove('hidden');
+            });
+        }
+
+        closeMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+        });
+
+        // Mobile teams dropdown
+        document.querySelectorAll('.relative > a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                if (window.innerWidth < 768) { // Only for mobile
+                    e.preventDefault();
+                    const menu = link.nextElementSibling;
+                    if (menu) {
+                        menu.classList.toggle('hidden');
+                    }
+                }
+            });
+        });
+
+        const section4 = document.getElementById('EN_section4');
+        const gif = document.getElementById('whatnextGif');
+
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                gif.style.opacity = entry.isIntersecting ? '1' : '0';
+            },
+            { threshold: 0.3 }
+        );
+
+        observer.observe(section4);
+
+        // Buddies SS
+        const buddiesSlideshow_images = [
+            "images/flyers/flyer1.jpg",
+            "images/flyers/flyer2.jpg",
+            "images/flyers/flyer3.jpg"
+        ];
+                
+        let buddiesSlideshow_index = 0;
+        let buddiesSlideshow_isPlaying = true;
+        let buddiesSlideshow_interval;
+
+        const buddiesSlideshow_modal = document.getElementById("buddiesSlideshow_modal");
+        const buddiesSlideshow_image = document.getElementById("buddiesSlideshow_image");
+        const buddiesSlideshow_playPause = document.getElementById("buddiesSlideshow_playPause");
+
+        function buddiesSlideshow_open() {
+            buddiesSlideshow_modal.style.display = "flex";
+            buddiesSlideshow_index = 0;
+            buddiesSlideshow_image.src = buddiesSlideshow_images[buddiesSlideshow_index];
+            buddiesSlideshow_start();
+        }
+
+        function buddiesSlideshow_close() {
+            buddiesSlideshow_modal.style.display = "none";
+            buddiesSlideshow_stop();
+        }
+
+        function buddiesSlideshow_next() {
+            buddiesSlideshow_index = (buddiesSlideshow_index + 1) % buddiesSlideshow_images.length;
+            buddiesSlideshow_image.src = buddiesSlideshow_images[buddiesSlideshow_index];
+        }
+
+        function buddiesSlideshow_prev() {
+            buddiesSlideshow_index = (buddiesSlideshow_index - 1 + buddiesSlideshow_images.length) % buddiesSlideshow_images.length;
+            buddiesSlideshow_image.src = buddiesSlideshow_images[buddiesSlideshow_index];
+        }
+
+        function buddiesSlideshow_start() {
+            buddiesSlideshow_interval = setInterval(buddiesSlideshow_next, 3000);
+            buddiesSlideshow_isPlaying = true;
+            buddiesSlideshow_playPause.textContent = "Pause";
+        }
+
+        function buddiesSlideshow_stop() {
+            clearInterval(buddiesSlideshow_interval);
+            buddiesSlideshow_isPlaying = false;
+            buddiesSlideshow_playPause.textContent = "Play";
+        }
+
+        function buddiesSlideshow_togglePlay() {
+            if (buddiesSlideshow_isPlaying) {
+                buddiesSlideshow_stop();
+            } else {
+                buddiesSlideshow_start();
+            }
+        }
+
+        // Allow ESC key to close
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape") buddiesSlideshow_close();
+        });
+
+        // Buddies SS
+        // Get the modal and the content wrapper
+        const modal = document.getElementById("buddiesSlideshow_modal");
+        const content = document.getElementById("buddiesSlideshow_content");
+
+        modal.addEventListener("click", function (event) {
+            // If click was NOT inside the content wrapper, close the modal
+            if (!content.contains(event.target)) {
+                buddiesSlideshow_close();
+            }
+        });
+
+        const dropdown = document.querySelector('.dropdown');
+        const dropdownMenu = dropdown.querySelector('.dropdown-menu');
+        let hideTimeout;
+
+        dropdown.addEventListener('mouseenter', () => {
+            clearTimeout(hideTimeout);
+            dropdownMenu.classList.add('fade-in');
+            dropdownMenu.classList.remove('fade-out', 'hidden');
+        });
+
+        dropdown.addEventListener('mouseleave', () => {
+            hideTimeout = setTimeout(() => {
+                dropdownMenu.classList.remove('fade-in');
+                dropdownMenu.classList.add('fade-out');
+                setTimeout(() => {
+                    dropdownMenu.classList.add('hidden');
+                }, 100); // match CSS fade duration
+            }, 100);
+        });
+
+        dropdownMenu.addEventListener('mouseenter', () => {
+            clearTimeout(hideTimeout);
+        });
+
+        dropdownMenu.addEventListener('mouseleave', () => {
+            hideTimeout = setTimeout(() => {
+                dropdownMenu.classList.remove('fade-in');
+                dropdownMenu.classList.add('fade-out');
+                setTimeout(() => {
+                    dropdownMenu.classList.add('hidden');
+                },100); // match CSS fade duration
+            }, 100);
+        });
+
+
+
+
+
+
+
+  document.addEventListener('DOMContentLoaded', function() {
+            generateComicElements();
+            
+            document.getElementById('refresh-btn').addEventListener('click', function() {
+                document.getElementById('comic-elements').innerHTML = '';
+                generateComicElements();
+            });
+        });
+        
+        function generateComicElements() {
+            const container = document.getElementById('comic-elements');
+            const width = window.innerWidth;
+            const height = Math.max(document.body.scrollHeight, document.body.offsetHeight, 
+                              document.documentElement.clientHeight, document.documentElement.scrollHeight, 
+                              document.documentElement.offsetHeight);
+            
+            const usedPositions = new Set();
+            const usedAngles = new Set();
+            
+            function getUniquePosition(size) {
+                let x, y, positionKey;
+                do {
+                    x = Math.random() * (width - size);
+                    y = Math.random() * (height - size);
+                    positionKey = `${Math.floor(x)}-${Math.floor(y)}`;
+                } while (usedPositions.has(positionKey));
+                usedPositions.add(positionKey);
+                return { x, y };
+            }
+            
+            function getUniqueAngle() {
+                let angle;
+                do {
+                    angle = Math.floor(Math.random() * 360);
+                } while (usedAngles.has(angle));
+                usedAngles.add(angle);
+                return angle;
+            }
+            
+            // Generate dots
+            for (let i = 0; i < 50; i++) {
+                const dot = document.createElement('div');
+                dot.className = 'comic-dot';
+                const size = Math.random() * 5 + 2;
+                dot.style.width = size + 'px';
+                dot.style.height = size + 'px';
+                const pos = getUniquePosition(size);
+                dot.style.left = pos.x + 'px';
+                dot.style.top = pos.y + 'px';
+                dot.style.setProperty('--i', i);
+                dot.style.setProperty('--angle', getUniqueAngle());
+                container.appendChild(dot);
+            }
+            
+            // Generate dotted lines that appear and disappear
+            for (let i = 0; i < 30; i++) {
+                const line = document.createElement('div');
+                line.className = 'comic-line';
+                const length = Math.random() * 150 + 50;
+                line.style.width = length + 'px';
+                
+                const angle = getUniqueAngle();
+                const pos = getUniquePosition(length);
+                
+                line.style.left = pos.x + 'px';
+                line.style.top = pos.y + 'px';
+                line.style.setProperty('--i', i);
+                line.style.setProperty('--angle', angle);
+                line.style.animationDelay = Math.random() * 2 + 's';
+                line.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                
+                container.appendChild(line);
+            }
+            
+            // Generate stars
+            for (let i = 0; i < 15; i++) {
+                const star = document.createElement('i');
+                star.className = 'comic-star fas fa-star';
+                const size = Math.random() * 2 + 1;
+                const pos = getUniquePosition(size * 10); // Approximate size in px
+                star.style.left = pos.x + 'px';
+                star.style.top = pos.y + 'px';
+                star.style.fontSize = size + 'rem';
+                star.style.setProperty('--i', i);
+                star.style.setProperty('--angle', getUniqueAngle());
+                star.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                container.appendChild(star);
+            }
+            
+            // Generate bursts
+            for (let i = 0; i < 5; i++) {
+                const burst = document.createElement('div');
+                burst.className = 'comic-burst';
+                const size = Math.random() * 30 + 20;
+                const pos = getUniquePosition(size);
+                burst.style.left = pos.x + 'px';
+                burst.style.top = pos.y + 'px';
+                burst.style.width = size + 'px';
+                burst.style.height = size + 'px';
+                burst.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 70%)`;
+                burst.style.animationDelay = Math.random() * 2 + 's';
+                container.appendChild(burst);
+            }
+            
+            // Generate zigzag lines
+            for (let i = 0; i < 5; i++) {
+                const zigzag = document.createElement('div');
+                zigzag.className = 'comic-line';
+                const segments = Math.floor(Math.random() * 5) + 3;
+                const segmentLength = 20;
+                const totalLength = segments * segmentLength;
+                
+                zigzag.style.width = totalLength + 'px';
+                zigzag.style.height = '3px';
+                const pos = getUniquePosition(totalLength);
+                zigzag.style.left = pos.x + 'px';
+                zigzag.style.top = pos.y + 'px';
+                zigzag.style.transform = `rotate(${getUniqueAngle()}deg)`;
+                zigzag.style.background = `repeating-linear-gradient(
+                    90deg,
+                    #000,
+                    #000 10px,
+                    transparent 10px,
+                    transparent 20px
+                )`;
+                container.appendChild(zigzag);
+            }
+
+            // Generate popup elements (circles and squares)
+            for (let i = 0; i < 15; i++) {
+                const popup = document.createElement('div');
+                popup.className = 'popup-element';
+                const size = Math.random() * 30 + 10;
+                const pos = getUniquePosition(size);
+                popup.style.width = size + 'px';
+                popup.style.height = size + 'px';
+                popup.style.left = pos.x + 'px';
+                popup.style.top = pos.y + 'px';
+                popup.style.backgroundColor = Math.random() > 0.5 ? '#FFB6C1' : 'white';
+                popup.style.setProperty('--i', i);
+                popup.style.setProperty('--angle', getUniqueAngle());
+                popup.style.setProperty('--border-radius', Math.random() > 0.5 ? '50%' : '0');
+                popup.style.animationDuration = (Math.random() * 6 + 4) + 's';
+                container.appendChild(popup);
+            }
+
+            // Add more popup elements
+            for (let i = 0; i < 30; i++) {
+                const popup = document.createElement('div');
+                popup.className = 'popup-element';
+                const size = Math.random() * 40 + 10;
+                const pos = getUniquePosition(size);
+                popup.style.width = size + 'px';
+                popup.style.height = size + 'px';
+                popup.style.left = pos.x + 'px';
+                popup.style.top = pos.y + 'px';
+                popup.style.backgroundColor = `hsl(${Math.random() * 360}, 80%, 70%)`;
+                popup.style.setProperty('--i', i);
+                popup.style.setProperty('--tx1', `${Math.random() * 400 - 200}px`);
+                popup.style.setProperty('--ty1', `${Math.random() * 400 - 200}px`);
+                popup.style.setProperty('--tx2', `${Math.random() * 400 - 200}px`);
+                popup.style.setProperty('--ty2', `${Math.random() * 400 - 200}px`);
+                popup.style.setProperty('--tx3', `${Math.random() * 400 - 200}px`);
+                popup.style.setProperty('--ty3', `${Math.random() * 400 - 200}px`);
+                popup.style.setProperty('--tx4', `${Math.random() * 400 - 200}px`);
+                popup.style.setProperty('--ty4', `${Math.random() * 400 - 200}px`);
+                popup.style.setProperty('--rot', `${getUniqueAngle()}deg`);
+                popup.style.setProperty('--rot1', `${getUniqueAngle()}deg`);
+                popup.style.setProperty('--rot2', `${getUniqueAngle()}deg`);
+                popup.style.setProperty('--rot3', `${getUniqueAngle()}deg`);
+                popup.style.setProperty('--rot4', `${getUniqueAngle()}deg`);
+                popup.style.animationDuration = (Math.random() * 8 + 4) + 's';
+                popup.style.setProperty('--border-radius', Math.random() > 0.5 ? '50%' : '0');
+                container.appendChild(popup);
+            }
+
+            // Add more stars
+            for (let i = 0; i < 30; i++) {
+                const star = document.createElement('i');
+                star.className = 'comic-star fas fa-star';
+                const size = Math.random() * 3 + 1;
+                const pos = getUniquePosition(size * 10); // Approximate size in px
+                star.style.left = pos.x + 'px';
+                star.style.top = pos.y + 'px';
+                star.style.fontSize = size + 'rem';
+                star.style.color = `hsl(${Math.random() * 360}, 100%, 70%)`;
+                star.style.setProperty('--i', i + 15); // Offset from first set of stars
+                star.style.setProperty('--angle', getUniqueAngle());
+                star.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                container.appendChild(star);
+            }
+        }
+    </script>
+</body>
+</html>
